@@ -1,0 +1,33 @@
+# Vive en el repo privado y viaja con cada entrega (ADR-063): GitHub lee el flujo
+# del commit que llega. Comprueba las sumas, crea el Release y borra la rama.
+name: Publicar entrega
+
+on:
+  push:
+    branches: [entrega]
+
+permissions:
+  contents: write
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Comprobar sumas
+        # Cada línea lleva el peso al final y el archivo cierra con la huella de firma.
+        run: grep -E '^[0-9a-f]{64}  ' SHA256SUMS.txt | sed -E 's/  \([^)]*\)$//' | sha256sum -c -
+
+      - name: Crear el release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG=$(cat VERSION)
+          gh release create "$TAG" ChaskiGo.apk ChaskiGo-armv7.apk SHA256SUMS.txt \
+            --target entrega --title "Chaski Go $TAG" --notes-file NOTAS.md --latest
+
+      - name: Borrar la rama
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X DELETE "repos/$GITHUB_REPOSITORY/git/refs/heads/entrega"
