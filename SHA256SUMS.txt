@@ -1,0 +1,7 @@
+Chaski Go 0.2.5 · compilación 20261101-143000 · publicado 2026-11-01 14:44 (hora de Lima)
+Paquete: com.vtasvent.chaskigo
+
+02ada466df9398d997d307ec5fadffa3c0fe58d2edd1a2a70b2abb5e31ad72e0  ChaskiGo.apk  (38.8 MB)
+2e2d06dbf13ab4d1ae1de2cffda90ce566745b30e7d604ba5f447e64e739e8cb  ChaskiGo-armv7.apk  (33.1 MB)
+
+Certificado de firma SHA-256: 53:D8:60:E7:D7:59:70:84:94:EF:DD:46:37:4F:09:C6:A5:20:8E:F3:27:EB:2C:D5:C6:5A:67:A9:77:A5:91:48
